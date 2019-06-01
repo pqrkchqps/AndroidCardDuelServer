@@ -19,11 +19,10 @@ io.on('connection', function(socket) {
      delete connections[socket.request.connection.remoteAddress];
      delete usernames[username];
      console.log(usernames);
-     console.log(connections)
+     console.log(connections);
     });
 	 socket.on("send_username", (usernamejson) => {
 			 console.log(usernamejson);
-       console.log(usernames);
        var username = JSON.parse(usernamejson).name;
        if (usernames[username]){
          socket.emit("verify_username", "User Name Taken");
@@ -36,6 +35,8 @@ io.on('connection', function(socket) {
          connections[socket.request.connection.remoteAddress] = username;
          socket.emit("verify_username", "User Name Added");
        }
+       console.log(usernames);
+       console.log(connections);
 	 });
    socket.on("send_exit", (usernamejson) => {
 			 console.log(usernamejson);
@@ -43,7 +44,7 @@ io.on('connection', function(socket) {
        delete usernames[username];
        delete connections[socket.request.connection.remoteAddress];
        console.log(usernames);
-       console.log(connections)
+       console.log(connections);
 	 });
 });
 
