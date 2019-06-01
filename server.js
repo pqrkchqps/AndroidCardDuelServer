@@ -28,6 +28,10 @@ io.on('connection', function(socket) {
        if (usernames[username]){
          socket.emit("verify_username", "User Name Taken");
        } else {
+         var old_username = connections[socket.request.connection.remoteAddress]
+         if (old_username){
+           delete usernames[old_username];
+         }
          usernames[username] = socket.request.connection.remoteAddress;
          connections[socket.request.connection.remoteAddress] = username;
          socket.emit("verify_username", "User Name Added");
