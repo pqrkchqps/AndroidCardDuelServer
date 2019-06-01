@@ -12,9 +12,14 @@ io.on('connection', function(socket) {
    //console.log('A user connected');
 
    //Whenever someone disconnects this piece of code executed
-   // socket.on('disconnect', function () {
-   //    console.log('A user disconnected');
-   // });
+   socket.on('disconnect', function () {
+     var username = connections[socket.connection.remoteAddress];
+     console.log('User '+ username ? username : "" +'disconnected');
+     delete connections[socket.connection.remoteAddress];
+     delete usernames[username];
+     console.log(usernames);
+     console.log(connections)
+    });
 	 socket.on("send_username", (usernamejson) => {
 			 console.log(usernamejson);
        console.log(usernames);
@@ -22,7 +27,8 @@ io.on('connection', function(socket) {
        if (usernames[username]){
          socket.emit("verify_username", "User Name Taken");
        } else {
-         usernames[username] = true;
+         usernames[username] = socket.connection.remoteAddress;
+         connections[socket.connection.remoteAddress] = username;
          socket.emit("verify_username", "User Name Added");
        }
 	 });
@@ -30,7 +36,9 @@ io.on('connection', function(socket) {
 			 console.log(usernamejson);
        var username = JSON.parse(usernamejson).name;
        delete usernames[username];
+       delete connections[socket.connection.remoteAddress];
        console.log(usernames);
+       console.log(connections)
 	 });
 });
 
