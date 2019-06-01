@@ -15,14 +15,14 @@ io.on('connection', function(socket) {
    socket.on('disconnect', function () {
       console.log('A user disconnected');
    });
-	 socket.on("emittest", (usernamejson) => {
+	 socket.on("send_username", (usernamejson) => {
 			 console.log(usernamejson);
        var username = JSON.parse(usernamejson).name;
        if (usernames.includes(username)){
-         socket.emit("Username Taken");
+         socket.emit("verify_username", "Username Taken");
        } else {
          usernames[username] = true;
-         socket.emit("Username Added");
+         socket.emit("verify_username", "Username Added");
        }
 	 });
 });
