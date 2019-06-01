@@ -19,7 +19,7 @@ io.on('connection', function(socket) {
 			 console.log(usernamejson);
        console.log(usernames);
        var username = JSON.parse(usernamejson).name;
-       if (usernames.includes(username)){
+       if (usernames[username]){
          socket.emit("verify_username", "User Name Taken");
        } else {
          usernames[username] = true;
