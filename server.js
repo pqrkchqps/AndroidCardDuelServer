@@ -26,6 +26,12 @@ io.on('connection', function(socket) {
          socket.emit("verify_username", "User Name Added");
        }
 	 });
+   socket.on("send_exit", (usernamejson) => {
+			 console.log(usernamejson);
+       var username = JSON.parse(usernamejson).name;
+       delete usernames[username];
+       console.log(usernames);
+	 });
 });
 
 var port = process.env.PORT || 9000;
