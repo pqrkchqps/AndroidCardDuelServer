@@ -12,6 +12,10 @@ app.get('/', function(req, res) {
 io.on('connection', function(socket) {
    //console.log('A user connected');
 
+   var myInterval = setInterval(function () {
+     socket.emit("ping", "ping");
+   }, 10000);
+
    //Whenever someone disconnects this piece of code executed
    socket.on('disconnect', function () {
      var username = connections[socket.request.connection.remoteAddress];
