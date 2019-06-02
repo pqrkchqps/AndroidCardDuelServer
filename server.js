@@ -14,7 +14,7 @@ io.on('connection', function(socket) {
 
    var myInterval = setInterval(function () {
      socket.emit("ping", "ping");
-   }, 10000);
+   }, 5000);
 
    //Whenever someone disconnects this piece of code executed
    socket.on('disconnect', function () {
