@@ -42,6 +42,7 @@ io.on('connection', function(socket) {
        }
        console.log(usernames);
        console.log(connections);
+       socket.emit("get_usernames", JSON.stringify(usernames));
 	 });
    socket.on("send_exit", (usernamejson) => {
 			 console.log(usernamejson);
