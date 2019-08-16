@@ -11,8 +11,12 @@ app.get('/', function(req, res) {
 //Whenever someone connects this gets executed
 io.on('connection', function(socket) {
    //console.log('A user connected');
-   socket.emit("get_usernames", JSON.stringify(usernames));
-
+   var username_keys = [];
+   for (key in usernames){
+     username_keys.push(key);
+   }
+   socket.emit("get_usernames", JSON.stringify(username_keys));
+   
    var myInterval = setInterval(function () {
      socket.emit("ping", "ping");
    }, 3000);
