@@ -15,7 +15,7 @@ io.on('connection', function(socket) {
    for (key in usernames){
      username_keys.push(key);
    }
-   socket.emit("get_usernames", JSON.stringify({username_keys}));
+   socket.emit("get_usernames", JSON.stringify(username_keys));
 
    var myInterval = setInterval(function () {
      socket.emit("ping", "ping");
@@ -50,7 +50,7 @@ io.on('connection', function(socket) {
        for (key in usernames){
          username_keys.push(key);
        }
-       socket.emit("get_usernames", JSON.stringify({username_keys}));
+       socket.emit("get_usernames", JSON.stringify(username_keys));
 	 });
    socket.on("send_exit", (usernamejson) => {
 			 console.log(usernamejson);
